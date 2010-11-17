@@ -34,12 +34,12 @@ module WavFile
 
     def to_s
       <<EOS
-フォーマットID: #{@id}
-チャンネル数: #{@channel}
-サンプリングレート: #{@hz} (Hz)
-byte per sec: #{@bytePerSec}
-bit per sample: #{@bitPerSample} 
-ブロックサイズ: #{blockSize}
+Format ID:      #{@id}
+Channels:       #{@channel}
+Sampling Ratio: #{@hz} (Hz)
+Byte per Sec:   #{@bytePerSec}
+Bit per Sample: #{@bitPerSample} 
+Block Size:     #{blockSize}
 EOS
     end
 

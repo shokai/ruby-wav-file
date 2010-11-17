@@ -4,20 +4,61 @@
 
 == DESCRIPTION:
 
-edit wav file's data chunk
+Read wav file format and Edit data chunk
 
 
-== FEATURES/PROBLEMS:
+== TIPS:
 
-* FIX (list of features or problems)
+To run samples, you need wav file.
+"ffmpeg" is good tool for making wav file from mp3.
+
+    % ffmpeg -i input.mp3 output.wav
+
+Wav-file gem cannot convert format of wav file.
+Before edit data-chunk of wav files, you should adjust them using ffmpeg.
+
 
 == SYNOPSIS:
+   
 
-  FIX (code sample of usage)
+Read format and chunks
 
-== REQUIREMENTS:
+    require 'rubygems'
+    require 'wav-file'
+    
+    f = open("input.wav")
+    format = WavFile::readFormat(f)
+    dataChunk = WavFile::readDataChunk(f)
+    f.close
+    
+    puts format
 
-* FIX (list of requirements)
+
+Extract wav from binary    
+
+    bit = 's*' if format.bitPerSample == 16 # int16_t
+    bit = 'c*' if format.bitPerSample == 8 # signed char
+    wavs = dataChunk.data.unpack(bit) # read binary
+
+
+Change volume half
+
+    wavs = wavs.map{|w| w/2}
+
+
+Reverse wav and encode to binary
+
+    dataChunk.data = wavs.reverse.pack(bit) # reverse
+    
+    
+Save to file
+
+    open("output.wav", "w"){|out|
+      WavFile::write(out, format, [dataChunk])
+    }
+
+See "samples" directory.
+
 
 == INSTALL:
 
