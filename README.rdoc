@@ -6,6 +6,9 @@
 
 Read wav file format and Edit data chunk
 
+== INSTALL:
+
+* gem install wav-file
 
 == TIPS:
 
@@ -58,11 +61,6 @@ Save to file
     }
 
 See "samples" directory.
-
-
-== INSTALL:
-
-* gem install wav-file
 
 == LICENSE:
 
