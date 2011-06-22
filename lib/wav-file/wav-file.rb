@@ -24,12 +24,12 @@ module WavFile
     def initialize(chunk)
       return if chunk.class != Chunk
       return if chunk.name != 'fmt '
-      @id = chunk.data.slice(0,2)[0].to_i
-      @channel = chunk.data.slice(2,2)[0].to_i
+      @id = chunk.data.slice(0,2).unpack('c')[0]
+      @channel = chunk.data.slice(2,2).unpack('c')[0]
       @hz = chunk.data.slice(4,4).unpack('V').join.to_i
       @bytePerSec = chunk.data.slice(8,4).unpack('V').join.to_i
-      @blockSize = chunk.data.slice(12,2)[0].to_i
-      @bitPerSample = chunk.data.slice(14,2)[0].to_i
+      @blockSize = chunk.data.slice(12,2).unpack('c')[0]
+      @bitPerSample = chunk.data.slice(14,2).unpack('c')[0]
     end
 
     def to_s
