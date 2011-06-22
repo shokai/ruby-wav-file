@@ -18,8 +18,7 @@ ARGV.each{|f|
   format = WavFile::readFormat open(f)
   if format != base_format
     puts `ffmpeg -i #{f} -ac #{base_format.channel} -ar #{base_format.hz} fixed_#{f}`
+  else
+    puts "#{f} is ok"
   end
 }
-
-
-
