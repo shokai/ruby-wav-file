@@ -73,6 +73,7 @@ EOS
     raise(WavFormatError) if riff != 'RIFF' or wave != 'WAVE'
     
     formatChunk = Chunk.new(f)
+    formatChunk = Chunk.new(f) if formatChunk.name == "JUNK"
     Format.new(formatChunk)
   end
 
